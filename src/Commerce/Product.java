@@ -1,9 +1,5 @@
 package Commerce;
 
-import java.sql.ClientInfoStatus;
-import java.util.ArrayList;
-import java.util.List;
-
 public class Product {
     //속성
     private String name;
@@ -12,8 +8,6 @@ public class Product {
     private int stock;
 
     //생성자
-    public Product(){}
-
     public Product(String name, int price, String explain, int stock){
         this.name = name;
         this.price = price;
