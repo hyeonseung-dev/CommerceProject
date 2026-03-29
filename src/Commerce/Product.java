@@ -15,6 +15,7 @@ public class Product {
         this.stock = stock;
     }
     //기능
+    //속성 접근 기능 - 속성 꺼내오기
     public String getName(){
         return name;
     }
@@ -26,6 +27,20 @@ public class Product {
     }
     public int getStock(){
         return stock;
+    }
+
+    //속성 접근 기능 - 속성 수정하기
+    public void setName(String name){
+        this.name = name;
+    }
+    public void setPrice(int price){
+        this.price = price;
+    }
+    public void setExplain(String explain){
+        this.explain = explain;
+    }
+    public void setStock(int stock){
+        this.stock = stock;
     }
 
 }

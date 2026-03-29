@@ -6,11 +6,11 @@ import java.util.Scanner;
 
 public class CommerceSystem {
     //속성
-    List<Category> categories;
+    private List<Category> categories;
     Scanner scanner = new Scanner(System.in);
-    int selectCategory;
-    int findCategoryIndex;
-    int selectProduct;
+    private int selectCategory;
+    private int findCategoryIndex;
+    private int selectProduct;
 
     //생성자
     public CommerceSystem(List<Category> categories) {
@@ -61,6 +61,7 @@ public class CommerceSystem {
                 default:
                     // 등록된 카테고리 외 선택 시 예외처리
                     System.out.println("잘못된 입력입니다. 다시 입력하세요.");
+                    continue;
             }
 
             // 선택한 상품 출력

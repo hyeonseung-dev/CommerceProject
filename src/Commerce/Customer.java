@@ -13,6 +13,7 @@ public class Customer {
         this.grade = grade;
     }
     //기능
+    //속성 접근 기능 - 속성 꺼내오기
     public String getName(){
         return name;
     }
@@ -21,5 +22,16 @@ public class Customer {
     }
     public String getGrade(){
         return grade;
+    }
+
+    //속성 접근 기능 - 속성 수정하기
+    public void setName(String name){
+        this.name = name;
+    }
+    public void setEmail(String email){
+        this.email = email;
+    }
+    public void setGrade(String grade){
+        this.grade = grade;
     }
 }
