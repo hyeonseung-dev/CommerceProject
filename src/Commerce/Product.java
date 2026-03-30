@@ -43,4 +43,12 @@ public class Product {
         this.stock = stock;
     }
 
+    // 장바구니에서 구매 시 재고 삭감 기능
+    public void decreaseStock(int quantity) {
+        if (quantity > stock) {
+            throw new IllegalArgumentException("재고가 부족합니다.");
+        }
+        stock -= quantity;
+    }
+
 }
