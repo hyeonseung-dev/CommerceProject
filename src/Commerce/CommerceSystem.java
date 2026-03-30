@@ -11,6 +11,8 @@ public class CommerceSystem {
     private int selectCategory;
     private int findCategoryIndex;
     private int selectProduct;
+    private int selectProductIndex;
+    Cart cart = new Cart();
 
     //생성자
     public CommerceSystem(List<Category> categories) {
@@ -73,13 +75,28 @@ public class CommerceSystem {
                 continue;
             }
 
-            // 0이면 종료
+            // 선택한 메뉴가 0이면 메인메뉴로 이동, 유효하지 않은 상품 번호 입력 시 메인메뉴로 이동, 정상이면 출력
             if(selectProduct == 0){
+                continue;
+            }else if(printSelectProduct(selectProduct) == -1){
                 continue;
             }
 
-            // 선택한 상품 출력
-            printSelectProduct(selectProduct);
+            //장바구니 추가 여부 묻기
+            System.out.println("위 상품을 장바구니에 추가하시겠습니까?");
+            System.out.printf("%-3s %10s\n",
+                    "1. 확인",
+                    "2. 취소");
+            int input = scanner.nextInt();
+            scanner.nextLine(); //버퍼 초기화
+
+            // 선택된 상품 변수화
+            String selectProductName =categories.get(findCategoryIndex).getProducts().get(selectProductIndex).getName();
+            int selectProductPrice =categories.get(findCategoryIndex).getProducts().get(selectProductIndex).getPrice();
+            String selectProductExplain =categories.get(findCategoryIndex).getProducts().get(selectProductIndex).getExplain();
+
+            // 장바구니 추가 메서드 실행
+            cart.addCart(input,selectProductName,selectProductPrice,selectProductExplain);
         }
     }
 
@@ -90,11 +107,12 @@ public class CommerceSystem {
                 if (categories.get(i).getCategory().equals(category)) {
                     for (int j = 0; j < categories.get(i).getProducts().size(); j++) {
                         System.out.printf(
-                                "%-3s %-15s | %,10d원 | %-30s\n",
+                                "%-3s %-15s | %,10d원 | %-25s | %s개\n",
                                 (j + 1) + ".",
                                 categories.get(i).getProducts().get(j).getName(),
                                 categories.get(i).getProducts().get(j).getPrice(),
-                                categories.get(i).getProducts().get(j).getExplain());
+                                categories.get(i).getProducts().get(j).getExplain(),
+                                categories.get(i).getProducts().get(j).getStock());
                     }
                     findCategoryIndex = i;
                 }
@@ -106,14 +124,17 @@ public class CommerceSystem {
     }
 
     // 선택한 상품 출력 : 선택한 카테고리 상품들 출력 메서드에서 선택된 카테고리 인덱스를 findCategoryIndex 변수에 저장하여 현 메서드에서 호출해 해당 카테고리의 상품을 출력
-    public void printSelectProduct(int selectProduct){
-        int selectProductIndex = selectProduct -1;  // 리스트 인덱스 맞춰주기
+    public int printSelectProduct(int selectProduct){
+        selectProductIndex = selectProduct -1;  // 리스트 인덱스 맞춰주기
         if(0 <= selectProductIndex && selectProductIndex < categories.get(findCategoryIndex).getProducts().size()){
-            System.out.println("선택한 상품 : "+categories.get(findCategoryIndex).getProducts().get(selectProductIndex).getName()+" | "+
-                    categories.get(findCategoryIndex).getProducts().get(selectProductIndex).getPrice()+" | "+
+            System.out.printf("%s %,d원 %s\n ",
+                    "선택한 상품 : "+categories.get(findCategoryIndex).getProducts().get(selectProductIndex).getName()+" | ",
+                    categories.get(findCategoryIndex).getProducts().get(selectProductIndex).getPrice()," | "+
                     categories.get(findCategoryIndex).getProducts().get(selectProductIndex).getExplain());
-        }else{
-            System.out.println("잘못된 입력입니다. 다시 입력하세요.");
+        }else {
+            System.out.println("유효하지 않은 상품 번호 입력입니다.");
+            return -1;
         }
+        return 1;
     }
 }
