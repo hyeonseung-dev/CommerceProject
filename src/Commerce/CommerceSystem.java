@@ -82,6 +82,12 @@ public class CommerceSystem {
                 continue;
             }
 
+            // 선택된 상품 변수화
+            String selectProductName =categories.get(findCategoryIndex).getProducts().get(selectProductIndex).getName();
+            int selectProductPrice =categories.get(findCategoryIndex).getProducts().get(selectProductIndex).getPrice();
+            String selectProductExplain =categories.get(findCategoryIndex).getProducts().get(selectProductIndex).getExplain();
+            int selectProductStock =categories.get(findCategoryIndex).getProducts().get(selectProductIndex).getStock();
+
             //장바구니 추가 여부 묻기
             System.out.println("위 상품을 장바구니에 추가하시겠습니까?");
             System.out.printf("%-3s %10s\n",
@@ -90,13 +96,8 @@ public class CommerceSystem {
             int input = scanner.nextInt();
             scanner.nextLine(); //버퍼 초기화
 
-            // 선택된 상품 변수화
-            String selectProductName =categories.get(findCategoryIndex).getProducts().get(selectProductIndex).getName();
-            int selectProductPrice =categories.get(findCategoryIndex).getProducts().get(selectProductIndex).getPrice();
-            String selectProductExplain =categories.get(findCategoryIndex).getProducts().get(selectProductIndex).getExplain();
-
             // 장바구니 추가 메서드 실행
-            cart.addCart(input,selectProductName,selectProductPrice,selectProductExplain);
+            cart.addCart(input,selectProductName,selectProductPrice,selectProductExplain,selectProductStock);
         }
     }
 

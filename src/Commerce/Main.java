@@ -12,7 +12,7 @@ public class Main {
         CommerceSystem system = new CommerceSystem(categories);
 
         // 전자제품 상품 등록
-        electronics.add(new Product("iPhone 16", 1350000, "Apple's latest smartphone", 10));
+        electronics.add(new Product("iPhone 16", 1350000, "Apple's latest smartphone", 0));
         electronics.add(new Product("MacBook Pro", 2400000, "Laptop powered by the M3 chipset", 10));
         electronics.add(new Product("Galaxy S25", 1200000, "Latest Android smartphone", 10));
         electronics.add(new Product("AirPods Pro", 350000, "Wireless earbuds with noise cancellation", 10));
