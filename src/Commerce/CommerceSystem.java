@@ -6,13 +6,13 @@ import java.util.Scanner;
 
 public class CommerceSystem {
     //속성
-    private List<Category> categories;
+    private final List<Category> categories;
     Scanner scanner = new Scanner(System.in);
     private int selectCategory;
     private int findCategoryIndex;
-    private int selectProduct;
     private int selectProductIndex;
     Cart cart = new Cart();
+    Admin admin = new Admin();
     int cartStart = 0;
 
     //생성자
@@ -24,6 +24,7 @@ public class CommerceSystem {
     // 커머스 플랫폼 메인 실행
     public void start() {
         while (true) {
+
             if(cartStart == 0) {
                 // 메인 플랫폼 실행, 장바구니 미 추가시
                 int mainResult = printMain1();
@@ -42,6 +43,7 @@ public class CommerceSystem {
                 }
             }
             // 선택한 상품 출력
+            int selectProduct;
             try {
                 selectProduct = scanner.nextInt();
             }catch (InputMismatchException e) {
@@ -82,13 +84,15 @@ public class CommerceSystem {
     // 장바구니 미 실행 시 메인 출력문 메서드 -> -1 : 컨티뉴 0: 종료 1 : 계속
     public int printMain1(){
         System.out.println("[ 실시간 커머스 플랫폼 메인 ]");
-        System.out.printf("%-3s %-14s\n%-3s %-14s\n%-3s %-14s\n%-3s %-4s | %-10s\n",
+        System.out.printf("%-3s %-14s\n%-3s %-14s\n%-3s %-14s\n%-3s %-14s\n%-3s %-4s | %-10s\n",
                 "1.",
                 "전자제품",
                 "2.",
                 "의류",
                 "3.",
                 "식품",
+                "6.",
+                "관리자 모드",
                 "0.",
                 "종료",
                 "프로그램 종료");
@@ -118,6 +122,10 @@ public class CommerceSystem {
                 // 선택한 카테고리 출력
                 printCategory("식품");
                 break;
+            case 6:
+                // 관리자 모드 출력
+                admin.login();
+                return -1;
             default:
                 // 등록된 카테고리 외 선택 시 예외처리
                 System.out.println("잘못된 입력입니다. 다시 입력하세요.");
@@ -129,7 +137,7 @@ public class CommerceSystem {
     // 장바구니 실행 시 메인 출력문 메서드 -> -1 : 컨티뉴 0: 종료 1 : 계속
     public int printMain2(){
         System.out.println("[ 실시간 커머스 플랫폼 메인 ]");
-        System.out.printf("%-3s %-14s\n%-3s %-14s\n%-3s %-14s\n%s\n%-3s %-14s\n%-3s %-14s\n%-3s %-4s | %-10s\n",
+        System.out.printf("%-3s %-14s\n%-3s %-14s\n%-3s %-14s\n%s\n%-3s %-14s\n%-3s %-14s\n%-3s %-14s\n%-3s %-4s | %-10s\n",
                 "1.",
                 "전자제품",
                 "2.",
@@ -141,6 +149,8 @@ public class CommerceSystem {
                 "장바구니 확인",
                 "5.",
                 "주문 취소",
+                "6.",
+                "관리자 모드",
                 "0.",
                 "종료",
                 "프로그램 종료");
@@ -178,6 +188,10 @@ public class CommerceSystem {
                 // 주문 취소 기능
                 cart.cancelCart();
                 cartStart =0;
+                return -1;
+            case 6:
+                // 관리자 모드 출력
+                admin.login();
                 return -1;
             default:
                 // 등록된 카테고리 외 선택 시 예외처리

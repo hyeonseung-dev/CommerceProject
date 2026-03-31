@@ -11,13 +11,13 @@ public class Cart {
     Scanner scanner = new Scanner(System.in);
     private int input;
 
-    // 장바구니 추가하기
+    // 장바구니 추가하기 0 : 취소 / 1 : 추가
     public int addProduct(int input, Product product) {
         if (product.getStock() < 1) {
             System.out.println("해당 상품은 재고가 없습니다.");
             return 0;
         }
-
+        // 주문 취소 시 취소
         if (input != 1) {
             System.out.println("취소되었습니다.");
             return 0;
