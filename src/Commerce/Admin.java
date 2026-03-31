@@ -12,9 +12,22 @@ public class Admin {
     String inputPassword;
     int inputMenu;
     int chance = 3;
+    private List<Category> categories;
+    List<Product> electronics;
+    List<Product> clothes;
+    List<Product> foods;
 
 
     //생성자
+    public Admin(){}
+    public Admin(List<Product> electronics, List<Product> clothes, List<Product> foods, List<Category> categories)
+{
+        this.electronics = electronics;
+        this.clothes = clothes;
+        this.foods = foods;
+        this.categories = categories;
+        }
+
 
     //기능
     public void login(){
@@ -72,6 +85,7 @@ public class Admin {
                 case 0:
                     return;
                 case 1:
+                    addProduct();
                     break;
                 case 2:
 
@@ -88,6 +102,66 @@ public class Admin {
             }
 
         }
+    }
+
+    // 상품 추가
+    public void addProduct(){
+        System.out.println("어느 카테고리에 상품을 추가하시겠습니까?");
+        System.out.printf("%-3s %-14s\n%-3s %-14s\n%-3s %-14s\n",
+                "1.",
+                "전자제품",
+                "2.",
+                "의류",
+                "3.",
+                "식품");
+
+        int inputCategoryInt = scanner.nextInt();
+        scanner.nextLine();
+        String inputCategoryString;
+        if(inputCategoryInt == 1){
+            inputCategoryString = "전자제품";
+        }else if(inputCategoryInt == 2){
+            inputCategoryString = "의류";
+        }else if(inputCategoryInt == 3){
+            inputCategoryString = "식품";
+        }else {
+            System.out.println("없는 카테고리입니다. 다시 입력하세요.");
+            return;
+        }
+
+
+        System.out.println("[ "+ inputCategoryString +" ] 카테고리에 상품 추가");
+        System.out.print("상품명을 임력해주세요:");
+        String productName = scanner.nextLine();
+
+        System.out.print("가격을 임력해주세요:");
+        int productPrice = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.print("상품 설명을 임력해주세요:");
+        String productExplain = scanner.nextLine();
+
+        System.out.print("재고를 임력해주세요:");
+        int productStock = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.println(productName+" | "+productPrice+"원 | "+productExplain+" | 재고 :"+productStock+"개");
+        System.out.println("위 정보로 상품을 추가하시겠습니까?");
+        System.out.println("1. 확인    2. 취소");
+
+        int input = scanner.nextInt();
+        scanner.nextLine();
+        // 여기부터 진행
+        if(input == 1){
+            for(int i = 0 ; i < categories.size(); i++){
+                if(inputCategoryString.equals(categories.get(i).getCategory())){
+                    categories.get(i).getProducts().add(new Product(productName, productPrice, productExplain, productStock));
+                    System.out.println("상품이 추가되었습니다.");
+                    return;
+                }
+            }
+        }
+
     }
 
 }

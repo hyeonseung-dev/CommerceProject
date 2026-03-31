@@ -9,7 +9,8 @@ public class Main {
         List<Product> electronics = new ArrayList<>();
         List<Product> clothes = new ArrayList<>();
         List<Product> foods = new ArrayList<>();
-        CommerceSystem system = new CommerceSystem(categories);
+        Admin admin = new Admin(electronics, clothes, foods,categories);
+        CommerceSystem system = new CommerceSystem(categories,admin);
 
         // 전자제품 상품 등록
         electronics.add(new Product("iPhone 16", 1350000, "Apple's latest smartphone", 0));

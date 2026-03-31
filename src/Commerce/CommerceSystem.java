@@ -12,12 +12,13 @@ public class CommerceSystem {
     private int findCategoryIndex;
     private int selectProductIndex;
     Cart cart = new Cart();
-    Admin admin = new Admin();
+    Admin admin;
     int cartStart = 0;
 
     //생성자
-    public CommerceSystem(List<Category> categories) {
+    public CommerceSystem(List<Category> categories, Admin admin) {
         this.categories = categories;
+        this.admin = admin;
     }
 
     //기능
@@ -27,7 +28,7 @@ public class CommerceSystem {
 
             if(cartStart == 0) {
                 // 메인 플랫폼 실행, 장바구니 미 추가시
-                int mainResult = printMain1();
+                int mainResult = printMain();
                 if (mainResult == 0) {
                     return;
                 } else if (mainResult == -1) {
@@ -35,7 +36,7 @@ public class CommerceSystem {
                 }
             }else {
                 // 메인 플랫폼 실행, 장바구니 추가시
-                int mainResult = printMain2();
+                int mainResult = printMainPlus();
                 if (mainResult == 0) {
                     return;
                 } else if (mainResult == -1) {
@@ -82,7 +83,7 @@ public class CommerceSystem {
     }
 
     // 장바구니 미 실행 시 메인 출력문 메서드 -> -1 : 컨티뉴 0: 종료 1 : 계속
-    public int printMain1(){
+    public int printMain(){
         System.out.println("[ 실시간 커머스 플랫폼 메인 ]");
         System.out.printf("%-3s %-14s\n%-3s %-14s\n%-3s %-14s\n%-3s %-14s\n%-3s %-4s | %-10s\n",
                 "1.",
@@ -135,7 +136,7 @@ public class CommerceSystem {
     }
 
     // 장바구니 실행 시 메인 출력문 메서드 -> -1 : 컨티뉴 0: 종료 1 : 계속
-    public int printMain2(){
+    public int printMainPlus(){
         System.out.println("[ 실시간 커머스 플랫폼 메인 ]");
         System.out.printf("%-3s %-14s\n%-3s %-14s\n%-3s %-14s\n%s\n%-3s %-14s\n%-3s %-14s\n%-3s %-14s\n%-3s %-4s | %-10s\n",
                 "1.",
