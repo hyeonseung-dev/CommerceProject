@@ -33,9 +33,16 @@ public class Product {
     public void setName(String name){
         this.name = name;
     }
-    public void setPrice(int price){
-        this.price = price;
+    public void changePrice(int newPrice){
+        validatePrice(newPrice);
+        this.price = newPrice;
     }
+    public void validatePrice(int price){
+        if(price < 0){
+            throw new IllegalArgumentException("가격은 0 이상이어여합니다.");
+        }
+    }
+
     public void setExplain(String explain){
         this.explain = explain;
     }

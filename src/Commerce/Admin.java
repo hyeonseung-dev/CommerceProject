@@ -80,6 +80,8 @@ public class Admin {
                 scanner.nextLine(); // 버퍼 초기화
             }
 
+            scanner.nextLine(); // 버퍼 초기화
+
             // 메뉴 별 기능
             switch (inputMenu) {
                 case 0:
@@ -88,7 +90,7 @@ public class Admin {
                     addProduct();
                     break;
                 case 2:
-
+                    setProduct();
                     break;
                 case 3:
 
@@ -173,7 +175,96 @@ public class Admin {
                 }
             }
         }
+    }
+    // 상품 수정
+    public void setProduct() {
+        System.out.println("수정할 상품명을 입력해주세요.");
+        String inputProductName = scanner.nextLine();
+        Product selectedProduct = null;
+
+        for (Category category : categories) {
+            for (Product product : category.getProducts()) {
+                if (product.getName().equals(inputProductName)) {
+                    System.out.println("현재 상품 정보: " +
+                            product.getName() + " | " +
+                            product.getExplain() + " | " +
+                            product.getPrice() + " | 재고 :" +
+                            product.getStock() + "개"
+                    );
+                    selectedProduct = product;
+                    break;
+                }
+            }
+            if (selectedProduct != null) {
+                break;
+            }
+        }
+
+        if (selectedProduct == null) {
+            System.out.println("상품이 없습니다.");
+            return;
+        }
+
+
+        System.out.println("수정할 항목을 선택해주세요:");
+        System.out.printf("%-3s %-14s\n%-3s %-14s\n%-3s %-14s\n",
+                "1.",
+                "가격",
+                "2.",
+                "설명",
+                "3.",
+                "재고수량");
+        int inputProductSet = scanner.nextInt();
+        scanner.nextLine();  //버퍼 초기화
+
+        if(selectedProduct == null){
+            System.out.println("상품이 없습니다.");
+            return;
+        }
+
+        switch (inputProductSet) {
+            case 1:
+                int nowPrice;
+                System.out.printf("%s %,d원",
+                        "현재 가격:",
+                        selectedProduct.getPrice());
+                try {
+                    nowPrice = selectedProduct.getPrice();
+                }catch (InputMismatchException e) {
+                    System.out.println("잘못된 입력입니다. 다시 입력하세요.");
+                    scanner.nextLine(); // 버퍼 초기화
+                    return;
+                }
+                System.out.print("새로운 가격을 입력해 주세요:");
+                int inputNewPrice = scanner.nextInt();
+                scanner.nextLine();
+
+                // 변경 가격 이상 확인
+                try {
+                    selectedProduct.changePrice(inputNewPrice);
+                }catch (IllegalArgumentException e){
+                    System.out.println(e.getMessage());
+                }
+
+                System.out.printf("%s의 가격이 %,d원 -> %,d원으로 수정되었습니다.",
+                        selectedProduct.getName(),
+                        nowPrice,
+                        inputNewPrice
+                        );
+
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            default:
+                System.out.println("잘못된 입력입니다. 다시 입력하세요.");
+                return;
+        }
+
 
     }
+
+
 
 }
