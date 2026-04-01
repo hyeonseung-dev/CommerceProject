@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class Cart {
     // 속성
     private List<CartItem> cartList = new ArrayList<>();
-    Scanner scanner = new Scanner(System.in);
+    private Scanner scanner = new Scanner(System.in);
     private int input;
 
     // 장바구니 추가하기 0 : 취소 / 1 : 추가

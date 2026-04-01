@@ -11,8 +11,8 @@ public class CommerceSystem {
     private int selectCategory;
     private int findCategoryIndex;
     private int selectProductIndex;
-    Cart cart = new Cart();
-    Admin admin;
+    private Cart cart = new Cart();
+    private Admin admin;
     int cartStart = 0;
 
     //생성자
@@ -61,8 +61,10 @@ public class CommerceSystem {
             }
 
 
-            // 선택된 상품 객체화
-            Product selectedProduct = categories.get(findCategoryIndex).getProducts().get(selectProductIndex);
+            // 선택된 상품 끊어주기
+            Category selectedCategory = categories.get(findCategoryIndex);
+            List<Product> selectedProducts = selectedCategory.getProducts();
+            Product selectedProduct = selectedProducts.get(selectProductIndex);
 
             //장바구니 추가 여부 묻기
             System.out.println("위 상품을 장바구니에 추가하시겠습니까?");

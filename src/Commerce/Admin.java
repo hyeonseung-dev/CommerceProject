@@ -8,14 +8,14 @@ import java.util.Scanner;
 public class Admin {
     //속성
     private String password = "admin";
-    Scanner scanner = new Scanner(System.in);
-    String inputPassword;
-    int inputMenu;
-    int chance = 3;
+    private Scanner scanner = new Scanner(System.in);
+    private String inputPassword;
+    private int inputMenu;
+    private int chance = 3;
     private List<Category> categories;
-    List<Product> electronics;
-    List<Product> clothes;
-    List<Product> foods;
+    private List<Product> electronics;
+    private List<Product> clothes;
+    private List<Product> foods;
 
 
     //생성자
@@ -144,6 +144,18 @@ public class Admin {
         System.out.print("재고를 임력해주세요:");
         int productStock = scanner.nextInt();
         scanner.nextLine();
+
+        // 중복 상품명 검증
+        for (Category category : categories) {
+            if (category.getCategory().equals(inputCategoryString)) {
+                for (int i = 0; i < category.getProducts().size(); i++) {
+                    if (category.getProducts().get(i).getName().equals(productName)) {
+                        System.out.println("중복된 상품명입니다. 다시 입력하세요.");
+                        return;
+                    }
+                }
+            }
+        }
 
         System.out.println(productName+" | "+productPrice+"원 | "+productExplain+" | 재고 :"+productStock+"개");
         System.out.println("위 정보로 상품을 추가하시겠습니까?");
