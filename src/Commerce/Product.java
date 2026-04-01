@@ -46,8 +46,14 @@ public class Product {
     public void setExplain(String explain){
         this.explain = explain;
     }
-    public void setStock(int stock){
-        this.stock = stock;
+    public void changeStock(int newStock){
+        validatePrice(newStock);
+        this.stock = newStock;
+    }
+    public void validateStock(int stock) {
+        if (stock < 0) {
+            throw new IllegalArgumentException("수량은 0 이상이어여합니다.");
+        }
     }
 
     // 장바구니에서 구매 시 재고 삭감 기능

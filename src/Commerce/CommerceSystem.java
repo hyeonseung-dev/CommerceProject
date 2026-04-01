@@ -11,14 +11,15 @@ public class CommerceSystem {
     private int selectCategory;
     private int findCategoryIndex;
     private int selectProductIndex;
-    private Cart cart = new Cart();
+    private Cart cart;
     private Admin admin;
     int cartStart = 0;
 
     //생성자
-    public CommerceSystem(List<Category> categories, Admin admin) {
+    public CommerceSystem(List<Category> categories, Admin admin, Cart cart) {
         this.categories = categories;
         this.admin = admin;
+        this.cart = cart;
     }
 
     //기능

@@ -11,6 +11,7 @@ public class Cart {
     private Scanner scanner = new Scanner(System.in);
     private int input;
 
+
     // 장바구니 추가하기 0 : 취소 / 1 : 추가
     public int addProduct(int input, Product product) {
         if (product.getStock() < 1) {
@@ -119,4 +120,15 @@ public class Cart {
     public boolean isEmpty() {
         return cartList.isEmpty();
     }
+
+    // 장바구니 상품 지우기
+    public void removeProductFromCart(Product product) {
+        for (int i = 0; i < cartList.size(); i++) {
+            if (cartList.get(i).getProduct() == product) {
+                cartList.remove(i);
+                i--;
+            }
+        }
+    }
+
 }
