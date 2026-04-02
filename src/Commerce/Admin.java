@@ -62,14 +62,13 @@ public class Admin {
     public void adminMode() {
         while (true) {
             System.out.println("[ 관리자 모드 ]");
-            System.out.printf("%-3s %-14s\n%-3s %-14s\n%-3s %-14s\n%s\n%-3s %-14s\n%-3s %-14s\n",
+            System.out.printf("%-3s %-14s\n%-3s %-14s\n%-3s %-14s\n%-3s %-14s\n%-3s %-14s\n",
                     "1.",
                     "상품 추가",
                     "2.",
                     "상품 수정",
                     "3.",
                     "상품 삭제",
-                    "[ 주문 관리 ]",
                     "4.",
                     "전체 상품 현황",
                     "0.",
